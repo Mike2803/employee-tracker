@@ -1,8 +1,8 @@
-DROP TABLE IF EXISTS employee;
-DROP TABLE IF EXISTS roles;
-DROP TABLE IF EXISTS departement;
+DROP TABLE IF EXISTS employee_db;
+CREATE DATABASE employee_db;
+USE employee_db;
 
-CREATE TABLE `departement` (
+CREATE TABLE `department` (
     `id` int NOT NULL,
     `name` varchar(30) DEFAULT NULL
 );
@@ -12,7 +12,7 @@ CREATE TABLE `role` (
     `id` int NOT NULL,
     `title` varchar(30) DEFAULT NULL,
     `salary` decimal(30,0) DEFAULT NULL,
-    `departement_id` int DEFAULT NULL
+    `department_id` int DEFAULT NULL
 );
 
 
@@ -34,6 +34,6 @@ ALTER TABLE `role`
     MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
-ALTER TABLE `departement`
+ALTER TABLE `department`
     MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;

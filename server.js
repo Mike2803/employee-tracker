@@ -1,13 +1,12 @@
 const mysql = require("mysql2");
 const inquirer = require("inquirer");
-const cTable = require('console.table');
+const cTable = require("console.table");
 
-var connection = mysql.createConnection({
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: "vandy2803",
-    database: "employee_db"
+const connection = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "vandy2803",
+  database: "employee_db",
 });
 
 connection.connect(function(err) {
@@ -57,28 +56,28 @@ const promptUser = () => {
                 updateEmployee();
                 return; 
             case 'Finish':
-                connection.end();
-                return;                
+               connection.end();
+               return;                
         }
     }) 
 };
 
 function viewDepartments() {
-        connection.query(
-            `SELECT * FROM department`,
-            function(err, results) {
-                console.table(results);
+     connection.query(
+        `SELECT * FROM department`,
+        function(err, results) {
+            console.table(results);
 
-                if (err) throw err;
-            }
-        )
+            if (err) throw err;
+        }
+    )
 
-        promptUser();
+    promptUser();
 }
 
 function viewRoles() {
     connection.query(
-        `SELECT * FROM roles`,
+        `SELECT * FROM role`,
         function(err, results) {
             console.table(results);
 
@@ -147,7 +146,7 @@ function addRole() {
 }
 
 function addNewRole(data) {
-    connection.query("INSERT INTO roles SET ?", {title: data.newRoleName, salary: data.newRoleSalary, department_id: data.departmentName  },
+    connection.query("INSERT INTO role SET ?", {title: data.newRoleName, salary: data.newRoleSalary, department_id: data.departmentName  },
     function (err, res) {
         if (err) throw err;
         console.log(res);
@@ -184,7 +183,7 @@ function addEmployee() {
 }
 
 function addNewEmployee(data) {
-    connection.query("INSERT INTO employees SET ?", { first_name: data.firstName, last_name: data.lastName, role_id: data.roleId, manager_id: data.managerId },
+    connection.query("INSERT INTO employee SET ?", { first_name: data.firstName, last_name: data.lastName, role_id: data.roleId, manager_id: data.managerId },
     function (err, res) {
         if (err) throw err;
         console.log(res);
